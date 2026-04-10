@@ -1,0 +1,32 @@
+# Maven
+target/
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Logs
+logs/
+
+# Allure
+allure-results/
+allure-report/
+
+# Generated code (tracked separately)
+src/test/java/com/qa/autonomous/generated/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright
+playwright-report/
+test-results/
+
+# Env secrets
+.env
+*.env.local

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+    QA Autonomous System — TestNG Suite
+    =====================================
+    Groups:
+      smoke      → Critical path only, fast feedback
+      system     → Full orchestration tests (requires Ollama running)
+      sample     → All Phase 3 sample prompts
+      sample-api → API prompt samples only
+      sample-ui  → UI prompt samples only
+      sample-full→ Full pipeline samples only
+      sample-heal→ Healer pipeline samples only
+      sample-plan→ Planner pipeline samples only
+      unit       → Fast unit tests, no Ollama needed
+
+    Run specific groups:
+      mvn test -Dgroups=smoke
+      mvn test -Dgroups=sample-api
+      mvn test -Dtest=SamplePromptsRunner#prompt01_fullLoginTestSuite
+-->
+
+<suite name="QA Autonomous System" verbose="1" parallel="false" thread-count="1">
+
+    <parameter name="baseUrl" value="http://localhost:3000"/>
+    <parameter name="apiUrl"  value="http://localhost:8080"/>
+
+    <!-- ===================== SMOKE SUITE ===================== -->
+    <test name="Smoke — System Validation" preserve-order="true">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.qa.autonomous.tests.OrchestratorSystemTest"/>
+        </classes>
+    </test>
+
+    <!-- ===================== SYSTEM SUITE ===================== -->
+    <test name="System — Full Orchestration Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="system"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.qa.autonomous.tests.OrchestratorSystemTest"/>
+        </classes>
+    </test>
+
+    <!-- ===================== SAMPLE PROMPTS ===================== -->
+    <test name="Sample Prompts — All" preserve-order="true">
+        <groups>
+            <run>
+                <include name="sample"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.qa.autonomous.prompts.SamplePromptsRunner"/>
+        </classes>
+    </test>
+
+</suite>

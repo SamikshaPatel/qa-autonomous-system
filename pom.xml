@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qa.autonomous</groupId>
+    <artifactId>qa-autonomous-system</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>QA Autonomous System</name>
+    <description>Enterprise AI-powered QA Autonomous System using Ollama Llama3 + Multi-Agent Orchestration</description>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Core versions -->
+        <testng.version>7.9.0</testng.version>
+        <playwright.version>1.44.0</playwright.version>
+        <rest-assured.version>5.4.0</rest-assured.version>
+        <allure.version>2.27.0</allure.version>
+        <slf4j.version>2.0.13</slf4j.version>
+        <logback.version>1.5.6</logback.version>
+        <jackson.version>2.17.1</jackson.version>
+        <okhttp.version>4.12.0</okhttp.version>
+        <!-- Bumped to a newer Lombok to improve compatibility with newer JDKs -->
+        <lombok.version>1.18.40</lombok.version>
+        <assertj.version>3.25.3</assertj.version>
+        <!-- Bumped AspectJ to a newer patch release to support newer class file versions -->
+        <aspectj.version>1.9.24</aspectj.version>
+        <allure-maven.version>2.13.0</allure-maven.version>
+        <ollama.timeout.seconds>120</ollama.timeout.seconds>
+        <ollama.model>llama3</ollama.model>
+    </properties>
+
+    <dependencies>
+
+        <!-- ==================== LOGGING ==================== -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- ==================== TESTNG ==================== -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+
+        <!-- ==================== PLAYWRIGHT ==================== -->
+        <dependency>
+            <groupId>com.microsoft.playwright</groupId>
+            <artifactId>playwright</artifactId>
+            <version>${playwright.version}</version>
+        </dependency>
+
+        <!-- ==================== REST ASSURED ==================== -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>xml-path</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
+
+        <!-- ==================== ALLURE ==================== -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-attachments</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+
+        <!-- ==================== HTTP CLIENT (Ollama) ==================== -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
+
+        <!-- ==================== JSON / SERIALIZATION ==================== -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- ==================== LOMBOK ==================== -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ==================== ASSERTIONS ==================== -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+        </dependency>
+
+        <!-- ==================== UTILITIES ==================== -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.16.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Maven Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <!-- Surefire (TestNG runner) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <!--
+                        systemPropertyVariables forwards -D flags from the Maven CLI
+                        into the forked Surefire JVM. Without this block, -Dollama.timeout.seconds=120
+                        is visible to Maven but NOT to the test JVM — hence the timeout=5s bug.
+
+                        Usage: mvn test -Dollama.timeout.seconds=120
+                        These values also fall back to application.properties if not provided.
+                    -->
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <ollama.timeout.seconds>${ollama.timeout.seconds}</ollama.timeout.seconds>
+                        <ollama.model>${ollama.model}</ollama.model>
+                        <ollama.base.url>${ollama.base.url}</ollama.base.url>
+                        <ollama.max.tokens>${ollama.max.tokens}</ollama.max.tokens>
+                        <ollama.temperature>${ollama.temperature}</ollama.temperature>
+                        <playwright.base.url>${playwright.base.url}</playwright.base.url>
+                        <playwright.headless>${playwright.headless}</playwright.headless>
+                        <restassured.base.uri>${restassured.base.uri}</restassured.base.uri>
+                        <orchestrator.max.retries>${orchestrator.max.retries}</orchestrator.max.retries>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Allure Maven -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                </configuration>
+            </plugin>
+
+            <!-- Enforce Java 17 for builds to avoid tooling incompatibilities (Lombok/AspectJ vs newer JDKs) -->
+            <!--↵
+                Maven Shade Plugin — builds an executable fat jar.↵
+
+                Usage after build:↵
+                  java -jar target/qa-autonomous-system-1.0.0.jar "your prompt"
+                  java -jar target/qa-autonomous-system-1.0.0.jar -\-help
+
+                Build command:
+                  mvn clean package -DskipTests
+                -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <!-- Set the main class for java -jar execution -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.qa.autonomous.cli.QaAutonomousCli</mainClass>
+                                    <manifestEntries>
+                                        <Implementation-Title>QA Autonomous System</Implementation-Title>
+                                        <Implementation-Version>${project.version}</Implementation-Version>
+                                    </manifestEntries>
+                                </transformer>
+                                <!-- Merge service files (required for SLF4J) -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <!-- Merge logback config files -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
