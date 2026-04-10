@@ -1,9 +1,6 @@
 # Architecture Decision Records
 
 This document captures the key architectural decisions made when building the QA Autonomous System, including the context, the options considered, and the reasoning behind each choice.
-
-These are the questions every interviewer asks. Having written answers demonstrates engineering maturity — the ability to not just build things, but to justify why.
-
 ---
 
 ## ADR-001 — Why a multi-agent system instead of a single LLM prompt?
